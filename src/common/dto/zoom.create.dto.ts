@@ -1,16 +1,26 @@
-import { IsString, IsNumber, IsDateString, IsOptional, IsIn } from 'class-validator';
+import { IsString, IsNumber, IsOptional, IsObject, IsEmail } from 'class-validator';
 
-export class CreateMeetingDto {
+export class CreateZoomMeetingDto {
+  @IsString()
+  uuid: string;
+
+  @IsNumber()
+  id: number;
+
+  @IsString()
+  host_id: string;
+
+  @IsEmail()
+  host_email: string;
+
   @IsString()
   topic: string;
 
-  @IsDateString()
-  @IsOptional()
-  start_time: string; 
-
   @IsNumber()
-  @IsIn([1, 2, 3])
   type: number;
+
+  @IsString()
+  start_time: string;
 
   @IsNumber()
   duration: number;
@@ -18,7 +28,32 @@ export class CreateMeetingDto {
   @IsString()
   timezone: string;
 
+  @IsString()
+  created_at: string;
+
+  @IsString()
+  join_url: string;
+
   @IsOptional()
   @IsString()
-  agenda?: string;
+  start_url?: string;
+
+  @IsOptional()
+  @IsString()
+  password?: string;
+
+  @IsOptional()
+  @IsString()
+  h323_password?: string;
+
+  @IsOptional()
+  @IsString()
+  pstn_password?: string;
+
+  @IsOptional()
+  @IsString()
+  encrypted_password?: string;
+
+  @IsObject()
+  settings: Record<string, any>;
 }
