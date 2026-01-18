@@ -90,13 +90,12 @@ export class ZoomMeetingService {
           }
     }
     
-    @Cron('15 * * * * *')
+    @Cron('* 3 * * * *')
     async refreshToken(){
         try {
             const token=await this.tokenservice.getAccessToken();
-            const isexpired=isExpired(token.expiresAt);
 
-            console.log(isexpired);
+            const isexpired=isExpired(token.expiresAt);
             
             if(isexpired){
                 const response=await axios.post('https://zoom.us/oauth/token',null,{

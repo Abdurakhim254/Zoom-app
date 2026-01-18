@@ -43,7 +43,7 @@ import { TokenService } from 'src/services';
       },
     }),
   ],
-  providers: [TokenService, AuthGuard],
-  exports: [TokenService, AuthGuard],
+  providers:[ AuthGuard,TokenService],
+  exports: [AuthGuard,TokenService],
 })
 export class GuardModule {}

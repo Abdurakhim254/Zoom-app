@@ -1,9 +1,10 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Req } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Req, UseGuards } from '@nestjs/common';
 import { Request } from 'express';
-import { CreateMeetingDto } from 'src/common';
+import { CreateMeetingDto, RoleGuard } from 'src/common';
 import { ZoomApiService } from './zoom.api.service';
 
 @Controller('zoom')
+@UseGuards(RoleGuard)
 export class ZoomAPiController {
   constructor(private readonly zoomService: ZoomApiService) {}
 
