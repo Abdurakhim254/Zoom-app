@@ -13,8 +13,10 @@ export class TokenService {
   async createAccessToken(params:CreateTokenDto){
     
     await this.tokenModel.deleteMany({})
+
+    const expiresAt=Date.now()+params.expires_in*1000
     
-    const result=await this.tokenModel.create(params)
+    const result=await this.tokenModel.create({...params,expiresAt})
     
     return result
 
@@ -23,6 +25,6 @@ export class TokenService {
   async getAccessToken(){
     const result=await this.tokenModel.findOne()
 
-    return result.access_token
+    return result
   }
 }

@@ -1,30 +1,25 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { CreateMeetingDto, UpdateZoomMeetingDto } from 'src/common';
-import { createMeeting, deleteMeetingById, getAccessToken, getMeetingById, getMeetings, updateMeetingById } from 'src/utils';
-import { TokenService } from '../token/token.service';
 import { ZoomService } from '../zoom/zoom.service';
+import { ZoomMeetingService } from 'src/services';
 
 @Injectable()
 export class ZoomApiService {
   constructor(
-    private readonly configService: ConfigService,
-    private readonly tokenService:TokenService,
-    private readonly zoomService:ZoomService
+    private readonly zoomService:ZoomService,
+    private readonly meetingservice:ZoomMeetingService
   ) {}
 async getAccessToken(code: string) {
-  const res1= await getAccessToken(code,this.configService);
-
-  const res2=await this.tokenService.createAccessToken(res1);
+  const result= await this.meetingservice.getAccessToken(code);
 
   return {
-    res1,res2
+    result
   }
 } 
 
 async createMeeting(body:CreateMeetingDto){
-  const token=await this.tokenService.getAccessToken();
-  const meeting= await createMeeting(body,token);
+  const meeting= await this.meetingservice.createMeeting(body);
   const result=await this.zoomService.create(meeting);
   return {
     meeting,
@@ -33,11 +28,10 @@ async createMeeting(body:CreateMeetingDto){
 }
 
 async getMeeting(){
-  const token=await this.tokenService.getAccessToken();
   
   const meetings=await this.zoomService.findAll();
 
-  const result=await getMeetings(token);
+  const result=await this.meetingservice.getMeetings();
 
   return {
     meetings,result
@@ -45,9 +39,8 @@ async getMeeting(){
 }
 
 async deleteMeeting(meetingId:number){
-  const token=await this.tokenService.getAccessToken();
 
-  const [deletedmeeting,result]=await Promise.all([deleteMeetingById(meetingId,token),this.zoomService.remove(meetingId)]);
+  const [deletedmeeting,result]=await Promise.all([this.meetingservice.deleteMeetingById(meetingId),this.zoomService.remove(meetingId)]);
 
   return {
     result,deletedmeeting
@@ -55,9 +48,8 @@ async deleteMeeting(meetingId:number){
 }
 
 async getMeetingById(meetingId:number){
-  const token=await this.tokenService.getAccessToken();
 
-  const [meeting,result]=await Promise.all([getMeetingById(meetingId,token),this.zoomService.findOneByMeetingId(meetingId)]);
+  const [meeting,result]=await Promise.all([this.meetingservice.getMeetingById(meetingId),this.zoomService.findOneByMeetingId(meetingId)]);
 
   return {
     meeting,result
@@ -65,16 +57,14 @@ async getMeetingById(meetingId:number){
 }
 
 async updateMeeting(body:UpdateZoomMeetingDto,meetingId:number){
-  const token=await this.tokenService.getAccessToken();
 
-  // const [meeting,result]=await Promise.all([updateMeetingById(meetingId,token),this.zoomService.update(meetingId,body)]);
-
-  const result=await updateMeetingById(meetingId,token,body);
+  const [meeting,result]=await Promise.all([this.meetingservice.updateMeetingById(meetingId,body),this.zoomService.update(meetingId,body)]);
 
   return {
-    result
+    result,meeting
   };
 
 }
+
 
 }

@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { Configmodule, MongoDbModule } from 'src/module';
+import { Configmodule, CronModule, MongoDbModule } from 'src/module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { ZoomAPiModule } from './zoomapi/zoom.api..module';
@@ -9,6 +9,7 @@ import { ZoomModule } from './zoom/zoom.module';
 @Module({
   imports: [
     Configmodule,
+    CronModule,
     MongoDbModule,
     UserModule,
     AuthModule,

@@ -6,3 +6,8 @@ export const  getPayload=(load:JwtPayload)=>{
         role:load.role
     }
 }
+
+export const isExpired = (expiresAt: number): boolean => {
+    return Date.now() >= expiresAt;
+  };
+  

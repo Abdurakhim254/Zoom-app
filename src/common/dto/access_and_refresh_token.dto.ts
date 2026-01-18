@@ -6,15 +6,15 @@ export class TokenResponseDto {
 }
 
 export class CreateTokenDto {
-  @IsNumber()
-  @IsOptional() 
-  id?: number;
 
   @IsString()
   access_token: string;
 
   @IsString()
   refresh_token: string;
+
+  @IsNumber()
+  expires_in: number;
 }
 
 export class UpdateTokenDto {
@@ -25,4 +25,8 @@ export class UpdateTokenDto {
   @IsString()
   @IsOptional()
   refresh_token?: string;
+
+  @IsNumber()
+  @IsOptional()
+  expires_in?: number;
 }

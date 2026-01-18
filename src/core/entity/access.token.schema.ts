@@ -13,6 +13,9 @@ export class Token {
 
     @Prop()
     refresh_token: string;
+
+    @Prop()
+    expiresAt: number
 }
 
 export const TokenSchema = SchemaFactory.createForClass(Token);
