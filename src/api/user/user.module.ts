@@ -8,7 +8,7 @@ import { BcryptService } from 'src/infrastructure';
   imports: [
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
   ],
-  exports: [UserService,BcryptService],
-  providers: [UserService,BcryptService],
+  exports: [UserService, BcryptService],
+  providers: [UserService, BcryptService],
 })
 export class UserModule {}

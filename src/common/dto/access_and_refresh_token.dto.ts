@@ -6,7 +6,6 @@ export class TokenResponseDto {
 }
 
 export class CreateTokenDto {
-
   @IsString()
   access_token: string;
 

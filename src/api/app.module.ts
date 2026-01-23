@@ -1,5 +1,10 @@
 import { Module } from '@nestjs/common';
-import { Configmodule, CronModule, GuardModule, MongoDbModule } from 'src/module';
+import {
+  Configmodule,
+  CronModule,
+  GuardModule,
+  MongoDbModule,
+} from 'src/module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { ZoomAPiModule } from './zoomapi/zoom.api..module';
@@ -18,14 +23,14 @@ import { AuthGuard } from 'src/common';
     ZoomAPiModule,
     TokenModule,
     ZoomModule,
-    GuardModule
+    GuardModule,
   ],
   controllers: [],
   providers: [
     {
       provide: APP_GUARD,
       useClass: AuthGuard,
-    }
+    },
   ],
 })
 export class AppModule {}

@@ -1,13 +1,12 @@
-import { JwtPayload } from "src/common";
+import { JwtPayload } from 'src/common';
 
-export const  getPayload=(load:JwtPayload)=>{
-    return {
-        id:load.id,
-        role:load.role
-    }
-}
+export const getPayload = (load: JwtPayload) => {
+  return {
+    id: load.id,
+    role: load.role,
+  };
+};
 
 export const isExpired = (expiresAt: number): boolean => {
-    return Date.now() >= expiresAt;
-  };
-  
+  return Date.now() >= expiresAt;
+};

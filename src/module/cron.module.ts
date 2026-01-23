@@ -1,10 +1,7 @@
-import { Module } from "@nestjs/common";
+import { Module } from '@nestjs/common';
 import { ScheduleModule } from '@nestjs/schedule';
 
-
 @Module({
-    imports: [
-        ScheduleModule.forRoot(),
-    ],
+  imports: [ScheduleModule.forRoot()],
 })
-export class CronModule{}
+export class CronModule {}

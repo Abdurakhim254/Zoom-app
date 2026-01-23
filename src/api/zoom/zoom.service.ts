@@ -16,8 +16,12 @@ export class ZoomService {
     return meeting;
   }
   async findAll(): Promise<Zoom[]> {
-    return this.zoomModel.find().select('-settings').sort({ created_at: -1 }).exec();
-    }
+    return this.zoomModel
+      .find()
+      .select('-settings')
+      .sort({ created_at: -1 })
+      .exec();
+  }
   async findOneByMeetingId(meetingId: number): Promise<Zoom> {
     const meeting = await this.zoomModel.findOne({ id: meetingId }).exec();
 
@@ -28,10 +32,7 @@ export class ZoomService {
     return meeting;
   }
 
-  async update(
-    meetingId: number,
-    dto: UpdateZoomMeetingDto,
-  ): Promise<Zoom> {
+  async update(meetingId: number, dto: UpdateZoomMeetingDto): Promise<Zoom> {
     const meeting = await this.zoomModel.findOneAndUpdate(
       { id: meetingId },
       dto,

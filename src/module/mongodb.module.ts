@@ -11,7 +11,6 @@ import { AppConfigOptions } from 'src/common';
       useFactory: (configService: ConfigService) => {
         const app = configService.get<AppConfigOptions>('app');
 
-        
         if (!app?.db_url) {
           throw new Error('DB_URL is not defined');
         }

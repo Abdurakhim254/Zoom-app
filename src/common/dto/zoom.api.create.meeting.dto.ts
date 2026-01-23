@@ -1,4 +1,10 @@
-import { IsString, IsNumber, IsDateString, IsOptional, IsIn } from 'class-validator';
+import {
+  IsString,
+  IsNumber,
+  IsDateString,
+  IsOptional,
+  IsIn,
+} from 'class-validator';
 
 export class CreateMeetingDto {
   @IsString()
@@ -6,7 +12,7 @@ export class CreateMeetingDto {
 
   @IsDateString()
   @IsOptional()
-  start_time: string; 
+  start_time: string;
 
   @IsNumber()
   @IsIn([1, 2, 3])

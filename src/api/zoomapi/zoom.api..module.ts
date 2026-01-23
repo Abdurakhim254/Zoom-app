@@ -6,9 +6,9 @@ import { ZoomModule } from '../zoom/zoom.module';
 import { ZoomMeetingService } from 'src/services';
 
 @Module({
-  imports: [TokenModule,ZoomModule],
+  imports: [TokenModule, ZoomModule],
   controllers: [ZoomAPiController],
-  providers: [ZoomApiService,ZoomMeetingService],
-  exports:[ZoomMeetingService]
+  providers: [ZoomApiService, ZoomMeetingService],
+  exports: [ZoomMeetingService],
 })
 export class ZoomAPiModule {}

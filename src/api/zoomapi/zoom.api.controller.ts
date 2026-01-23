@@ -1,4 +1,14 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Req, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
 import { Request } from 'express';
 import { CreateMeetingDto, RoleGuard } from 'src/common';
 import { ZoomApiService } from './zoom.api.service';
@@ -29,7 +39,10 @@ export class ZoomAPiController {
   }
 
   @Patch('meeting/:meetingId')
-  async updateMeeting(@Body() body: CreateMeetingDto, @Param('meetingId') meetingId: number) {
+  async updateMeeting(
+    @Body() body: CreateMeetingDto,
+    @Param('meetingId') meetingId: number,
+  ) {
     return this.zoomService.updateMeeting(body, +meetingId);
   }
 
